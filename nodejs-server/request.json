@@ -1,0 +1,448 @@
+{
+    "offerings": [
+        {
+            "cse_subjects": [
+                {
+                    "id": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y",
+                    "sub_code": "CSC501",
+                    "sub_name": "Advanced Data Structures and Algorithms",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MiwiaWF0IjoxNjkyNzcxNTU3fQ.vszcnr3A5yzdPZ468WT6Ru_CJ-o-d1tG2dL6rbD_VwI",
+                    "sub_code": "CSC502",
+                    "sub_name": "Advanced Data Structures and Algorithms Lab",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MywiaWF0IjoxNjkyNzcxNTU3fQ.AwXUpoyCPiFxNB9_vGunN3MhzgLbh12FVpkWifYynm0",
+                    "sub_code": "CSC503",
+                    "sub_name": "Advanced Database Management System",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6NCwiaWF0IjoxNjkyNzcxNTU3fQ.0IA74CdszeDkGyK1Z2WexPyHabR6rriH5gIs19fkJls",
+                    "sub_code": "CSC504",
+                    "sub_name": "Advanced Database Management System Lab",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6NSwiaWF0IjoxNjkyNzcxNTU3fQ.DNcssVELQKXeywxmpKEbNqyfs2NxOJkaZexE2CUxzOw",
+                    "sub_code": "CSC505",
+                    "sub_name": "Theory of Computation",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6NiwiaWF0IjoxNjkyNzcxNTU3fQ.eiW-IXfNLriR2uefe0id-BIQ5b_RfDjcBNZiVbgzVEE",
+                    "sub_code": "CSC506",
+                    "sub_name": "System Simulation",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6NywiaWF0IjoxNjkyNzcxNTU3fQ.UDXgL7s5kl53Ho0SxE-ZLQiciZCMkqnJgDQB4QwwrJQ",
+                    "sub_code": "CSC507",
+                    "sub_name": "System Simulation Lab",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6OCwiaWF0IjoxNjkyNzcxNTU3fQ.vWy-7W9WLCSmAT-358Qk7p_PjAwENPqHJbWxtQ4qE5I",
+                    "sub_code": "CSC508",
+                    "sub_name": "Computer Networks",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6OSwiaWF0IjoxNjkyNzcxNTU3fQ.TgWqK38haFlYLf1SwFj105bQ2SxsMfzYN62DpjRmBbY",
+                    "sub_code": "CSC509",
+                    "sub_name": "Computer Networks Lab",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTAsImlhdCI6MTY5Mjc3MTU1N30.liVMKfk5cAoEsafvW0yW0aO-jgjFAPRe8AQ86yUd62A",
+                    "sub_code": "CSC510",
+                    "sub_name": "Cryptography",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTEsImlhdCI6MTY5Mjc3MTU1N30.T6aL8mPJpUYW4QUxkLe6ExcHJNVxcxo9Wai4g_g-Ihs",
+                    "sub_code": "CSC511",
+                    "sub_name": "Compiler Design",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTIsImlhdCI6MTY5Mjc3MTU1N30.kM4MWwTBU34oCYHMmLeBgBq6TrU83od0GkAelXGrAsg",
+                    "sub_code": "CSC512",
+                    "sub_name": "Compiler Design Lab",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTMsImlhdCI6MTY5Mjc3MTU1N30.K8rUwsBuFfaRJ2Fwx4XOuIGJXBPSQ9AAT0ZRnYuneN4",
+                    "sub_code": "CSC513",
+                    "sub_name": "Distributed Operating System",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTQsImlhdCI6MTY5Mjc3MTU1N30.QRIQsE1dAR95SF1dqadTRa1GoJpCzTwsuGgKr2JoIPw",
+                    "sub_code": "CSC5014",
+                    "sub_name": "Parallel and Distributed Computing",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTUsImlhdCI6MTY5Mjc3MTU1N30.PaFUJlJYIcEmENrwCuvv40lerp0GPNAh2m7n6ZZrnfI",
+                    "sub_code": "CSC515",
+                    "sub_name": "Grap Theory",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTYsImlhdCI6MTY5Mjc3MTU1N30.RQqLkiWofqOqp49oMB9YFLG_IhMgCnsfyR2jaRrILJ4",
+                    "sub_code": "CSC516",
+                    "sub_name": "Advanced Discrete Mathemaitcs",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTcsImlhdCI6MTY5Mjc3MTU1N30.1FPcQV0-OseImDFqUyrW1tLh9mnwehFPckJjUfuzhFQ",
+                    "sub_code": "CSC517",
+                    "sub_name": "Computer Graphics",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTgsImlhdCI6MTY5Mjc3MTU1N30.RhDtxZoEQL6gFOkbn0F3qo7t98t9sY6C3NQZSTMrpxE",
+                    "sub_code": "CSC518",
+                    "sub_name": "Computer Graphics Lab",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MTksImlhdCI6MTY5Mjc3MTU1N30.Ejhm7lAlUZ4XojX6Z__oE1owsnL7KDRO632Un1OZm-4",
+                    "sub_code": "CSC519",
+                    "sub_name": "Computer Architecture",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                },
+                {
+                    "id": "eyJpZCI6MjAsImlhdCI6MTY5Mjc3MTU1N30.JCQ9y67f3vjLR7B1vm1Kc4y4cpqwm3hXA_RHZFDBAkw",
+                    "sub_code": "CSC520",
+                    "sub_name": "Computer Organization",
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y"
+                }
+            ],
+            "cse_instructors": [
+                {
+                    "id": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o",
+                    "cv_link": null,
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcyNzk2fQ.ccL3aBIAlLxmALDVYGrp4RqIrI1M0qKTVixM-UhYwJs",
+                    "employeeId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcyNzk2fQ.ccL3aBIAlLxmALDVYGrp4RqIrI1M0qKTVixM-UhYwJs"
+                },
+                {
+                    "id": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4",
+                    "cv_link": null,
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcyNzk2fQ.ccL3aBIAlLxmALDVYGrp4RqIrI1M0qKTVixM-UhYwJs",
+                    "employeeId": "eyJpZCI6MiwiaWF0IjoxNjkyNzcyNzk2fQ.1jEdGAGsfu2LTHV6cEkKm3fTubI7dhAMJqjIl8mkcLM"
+                },
+                {
+                    "id": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c",
+                    "cv_link": null,
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcyNzk2fQ.ccL3aBIAlLxmALDVYGrp4RqIrI1M0qKTVixM-UhYwJs",
+                    "employeeId": "eyJpZCI6MywiaWF0IjoxNjkyNzcyNzk2fQ.wlSj4zfny_rWVHegYyO1pC2Qa7ppUtcBJSOz-YPzUcs"
+                },
+                {
+                    "id": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA",
+                    "cv_link": null,
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcyNzk2fQ.ccL3aBIAlLxmALDVYGrp4RqIrI1M0qKTVixM-UhYwJs",
+                    "employeeId": "eyJpZCI6NCwiaWF0IjoxNjkyNzcyNzk2fQ.4kb9H3khOZtuCHgqBEon_RLggX9NNjVCos2FjsWyqAM"
+                },
+                {
+                    "id": "eyJpZCI6NDEsImlhdCI6MTY5Mjc3Mjc5Nn0.oLOhPSKo8WZ3ajiRN7WfIKOdcB7zi7UTaHBp8ou4Z6g",
+                    "cv_link": null,
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcyNzk2fQ.ccL3aBIAlLxmALDVYGrp4RqIrI1M0qKTVixM-UhYwJs",
+                    "employeeId": "eyJpZCI6NSwiaWF0IjoxNjkyNzcyNzk2fQ.GC7mFyTGOvMVm3SJAdQGePW_yiiwKQTOjyqiS8zuNSA"
+                },
+                {
+                    "id": "eyJpZCI6NDIsImlhdCI6MTY5Mjc3Mjc5Nn0.h829cra6LkNq40JGnFEH96oTwHXXwBiF7xCxQN75il4",
+                    "cv_link": null,
+                    "departmentId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcyNzk2fQ.ccL3aBIAlLxmALDVYGrp4RqIrI1M0qKTVixM-UhYwJs",
+                    "employeeId": "eyJpZCI6NiwiaWF0IjoxNjkyNzcyNzk2fQ.juIvL-Iux5TMmskZfFO2dzJaIRlrAES-szNI7ozMcVQ"
+                }
+            ],
+            "semeters": [
+                {
+                    "id": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "sem_session": "2020-21",
+                    "sem_type": "monsoon"
+                },
+                {
+                    "id": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "sem_session": "2020-21",
+                    "sem_type": "winter"
+                },
+                {
+                    "id": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "sem_session": "2021-22",
+                    "sem_type": "monsoon"
+                },
+                {
+                    "id": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "sem_session": "2021-22",
+                    "sem_type": "winter"
+                }
+            ],
+            "subOfferings1":[
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6MiwiaWF0IjoxNjkyNzcxNTU3fQ.vszcnr3A5yzdPZ468WT6Ru_CJ-o-d1tG2dL6rbD_VwI",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6MywiaWF0IjoxNjkyNzcxNTU3fQ.AwXUpoyCPiFxNB9_vGunN3MhzgLbh12FVpkWifYynm0",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {   
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6NCwiaWF0IjoxNjkyNzcxNTU3fQ.0IA74CdszeDkGyK1Z2WexPyHabR6rriH5gIs19fkJls",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                },
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6NSwiaWF0IjoxNjkyNzcxNTU3fQ.DNcssVELQKXeywxmpKEbNqyfs2NxOJkaZexE2CUxzOw",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6NDEsImlhdCI6MTY5Mjc3Mjc5Nn0.oLOhPSKo8WZ3ajiRN7WfIKOdcB7zi7UTaHBp8ou4Z6g"
+                },
+                {   
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6NiwiaWF0IjoxNjkyNzcxNTU3fQ.eiW-IXfNLriR2uefe0id-BIQ5b_RfDjcBNZiVbgzVEE",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6NDIsImlhdCI6MTY5Mjc3Mjc5Nn0.h829cra6LkNq40JGnFEH96oTwHXXwBiF7xCxQN75il4"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6NywiaWF0IjoxNjkyNzcxNTU3fQ.UDXgL7s5kl53Ho0SxE-ZLQiciZCMkqnJgDQB4QwwrJQ",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6OCwiaWF0IjoxNjkyNzcxNTU3fQ.vWy-7W9WLCSmAT-358Qk7p_PjAwENPqHJbWxtQ4qE5I",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6OSwiaWF0IjoxNjkyNzcxNTU3fQ.TgWqK38haFlYLf1SwFj105bQ2SxsMfzYN62DpjRmBbY",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6MTAsImlhdCI6MTY5Mjc3MTU1N30.liVMKfk5cAoEsafvW0yW0aO-jgjFAPRe8AQ86yUd62A",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                }
+            ],
+            "subOfferings2":[
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTYsImlhdCI6MTY5Mjc3MTU1N30.RQqLkiWofqOqp49oMB9YFLG_IhMgCnsfyR2jaRrILJ4",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTcsImlhdCI6MTY5Mjc3MTU1N30.1FPcQV0-OseImDFqUyrW1tLh9mnwehFPckJjUfuzhFQ",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTgsImlhdCI6MTY5Mjc3MTU1N30.RhDtxZoEQL6gFOkbn0F3qo7t98t9sY6C3NQZSTMrpxE",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {   
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTksImlhdCI6MTY5Mjc3MTU1N30.Ejhm7lAlUZ4XojX6Z__oE1owsnL7KDRO632Un1OZm-4",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                },
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MjAsImlhdCI6MTY5Mjc3MTU1N30.JCQ9y67f3vjLR7B1vm1Kc4y4cpqwm3hXA_RHZFDBAkw",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6NDEsImlhdCI6MTY5Mjc3Mjc5Nn0.oLOhPSKo8WZ3ajiRN7WfIKOdcB7zi7UTaHBp8ou4Z6g"
+                },
+                {   
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTEsImlhdCI6MTY5Mjc3MTU1N30.T6aL8mPJpUYW4QUxkLe6ExcHJNVxcxo9Wai4g_g-Ihs",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6NDIsImlhdCI6MTY5Mjc3Mjc5Nn0.h829cra6LkNq40JGnFEH96oTwHXXwBiF7xCxQN75il4"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTIsImlhdCI6MTY5Mjc3MTU1N30.kM4MWwTBU34oCYHMmLeBgBq6TrU83od0GkAelXGrAsg",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTMsImlhdCI6MTY5Mjc3MTU1N30.K8rUwsBuFfaRJ2Fwx4XOuIGJXBPSQ9AAT0ZRnYuneN4",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTQsImlhdCI6MTY5Mjc3MTU1N30.QRIQsE1dAR95SF1dqadTRa1GoJpCzTwsuGgKr2JoIPw",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTUsImlhdCI6MTY5Mjc3MTU1N30.PaFUJlJYIcEmENrwCuvv40lerp0GPNAh2m7n6ZZrnfI",
+                    "semesterId": "eyJpZCI6MiwiaWF0IjoxNjkyNzgxMjQ3fQ.kRRfHzC3IWmuRBLNph-ENUKffEumTLgIzNEB7m9teoE",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                }
+            ],
+            "subOfferings3":[
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6MSwiaWF0IjoxNjkyNzcxNTU3fQ.d8T5_fapgpM2Ee_SKMWlyxdbvjXeDTSR03HtJZjmu_Y",
+                    "semesterId": "eyJpZCI6MSwiaWF0IjoxNjkyNzgxMjQ3fQ.0zPw9o0oq2wDWsizd3Akvib618WPi_EO-8xfuqBdPLw",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6MiwiaWF0IjoxNjkyNzcxNTU3fQ.vszcnr3A5yzdPZ468WT6Ru_CJ-o-d1tG2dL6rbD_VwI",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6MywiaWF0IjoxNjkyNzcxNTU3fQ.AwXUpoyCPiFxNB9_vGunN3MhzgLbh12FVpkWifYynm0",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {   
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6NCwiaWF0IjoxNjkyNzcxNTU3fQ.0IA74CdszeDkGyK1Z2WexPyHabR6rriH5gIs19fkJls",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                },
+                {
+                    "sem_no": 1,
+                    "subjectId": "eyJpZCI6NSwiaWF0IjoxNjkyNzcxNTU3fQ.DNcssVELQKXeywxmpKEbNqyfs2NxOJkaZexE2CUxzOw",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6NDEsImlhdCI6MTY5Mjc3Mjc5Nn0.oLOhPSKo8WZ3ajiRN7WfIKOdcB7zi7UTaHBp8ou4Z6g"
+                },
+                {   
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6NiwiaWF0IjoxNjkyNzcxNTU3fQ.eiW-IXfNLriR2uefe0id-BIQ5b_RfDjcBNZiVbgzVEE",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6NDIsImlhdCI6MTY5Mjc3Mjc5Nn0.h829cra6LkNq40JGnFEH96oTwHXXwBiF7xCxQN75il4"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6NywiaWF0IjoxNjkyNzcxNTU3fQ.UDXgL7s5kl53Ho0SxE-ZLQiciZCMkqnJgDQB4QwwrJQ",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6OCwiaWF0IjoxNjkyNzcxNTU3fQ.vWy-7W9WLCSmAT-358Qk7p_PjAwENPqHJbWxtQ4qE5I",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6OSwiaWF0IjoxNjkyNzcxNTU3fQ.TgWqK38haFlYLf1SwFj105bQ2SxsMfzYN62DpjRmBbY",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {
+                    "sem_no": 3,
+                    "subjectId": "eyJpZCI6MTAsImlhdCI6MTY5Mjc3MTU1N30.liVMKfk5cAoEsafvW0yW0aO-jgjFAPRe8AQ86yUd62A",
+                    "semesterId": "eyJpZCI6MywiaWF0IjoxNjkyNzgxMjQ3fQ.XcUAPo9HLZBJG4c5V2yzObL8lPLckBugbDxywplW3Zw",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                }
+            ],
+            "subOfferings4":[
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTYsImlhdCI6MTY5Mjc3MTU1N30.RQqLkiWofqOqp49oMB9YFLG_IhMgCnsfyR2jaRrILJ4",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTcsImlhdCI6MTY5Mjc3MTU1N30.1FPcQV0-OseImDFqUyrW1tLh9mnwehFPckJjUfuzhFQ",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTgsImlhdCI6MTY5Mjc3MTU1N30.RhDtxZoEQL6gFOkbn0F3qo7t98t9sY6C3NQZSTMrpxE",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {   
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MTksImlhdCI6MTY5Mjc3MTU1N30.Ejhm7lAlUZ4XojX6Z__oE1owsnL7KDRO632Un1OZm-4",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                },
+                {
+                    "sem_no": 2,
+                    "subjectId": "eyJpZCI6MjAsImlhdCI6MTY5Mjc3MTU1N30.JCQ9y67f3vjLR7B1vm1Kc4y4cpqwm3hXA_RHZFDBAkw",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6NDEsImlhdCI6MTY5Mjc3Mjc5Nn0.oLOhPSKo8WZ3ajiRN7WfIKOdcB7zi7UTaHBp8ou4Z6g"
+                },
+                {   
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTEsImlhdCI6MTY5Mjc3MTU1N30.T6aL8mPJpUYW4QUxkLe6ExcHJNVxcxo9Wai4g_g-Ihs",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6NDIsImlhdCI6MTY5Mjc3Mjc5Nn0.h829cra6LkNq40JGnFEH96oTwHXXwBiF7xCxQN75il4"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTIsImlhdCI6MTY5Mjc3MTU1N30.kM4MWwTBU34oCYHMmLeBgBq6TrU83od0GkAelXGrAsg",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6MzcsImlhdCI6MTY5Mjc3Mjc5Nn0.Rb3C-oI_zzQNq8N7brkXIpGDYuHMY4MWz4ODGEyOz_o"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTMsImlhdCI6MTY5Mjc3MTU1N30.K8rUwsBuFfaRJ2Fwx4XOuIGJXBPSQ9AAT0ZRnYuneN4",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6MzgsImlhdCI6MTY5Mjc3Mjc5Nn0.yfyDnFoH2unO15dkCuHcpqpRKfuiJb9DGoj1Ow2Hsc4"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTQsImlhdCI6MTY5Mjc3MTU1N30.QRIQsE1dAR95SF1dqadTRa1GoJpCzTwsuGgKr2JoIPw",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6MzksImlhdCI6MTY5Mjc3Mjc5Nn0.7GLVKnaRcWlWMtpIbgVmPFksvbas322wNuvCOtnqV0c"
+                },
+                {
+                    "sem_no": 4,
+                    "subjectId": "eyJpZCI6MTUsImlhdCI6MTY5Mjc3MTU1N30.PaFUJlJYIcEmENrwCuvv40lerp0GPNAh2m7n6ZZrnfI",
+                    "semesterId": "eyJpZCI6NCwiaWF0IjoxNjkyNzgxMjQ3fQ.urCUuB6lErMJDqXS7rgEwlpgru00WSY5jR8zUgFMsEM",
+                    "instructorId": "eyJpZCI6NDAsImlhdCI6MTY5Mjc3Mjc5Nn0.im7y9e1TAHxfAMjjszqtu0J34X71_4j-RwG7IvAxrmA"
+                }
+            ]
+        },
+        {
+            "ee_subjects": [
+
+            ],
+            "ee_instructors": [
+
+            ],
+            "subOfferings": [
+
+            ]
+        }
+    ]
+}
+
