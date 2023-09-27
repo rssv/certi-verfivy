@@ -8,6 +8,7 @@ const Subject = require('./subjects');
 const User = require('./users');
 const SubOffering = require('./subOffering');
 const StudentSubjectRegistration = require('./studentSubjectRegistration');
+const SubOfferingForDept = require('./subOfferingForDept');
 
 module.exports = {
     Course, 
@@ -19,6 +20,7 @@ module.exports = {
     Subject,
     User,
     SubOffering,
+    SubOfferingForDept,
     StudentSubjectRegistration,
     associations: () => {
         Department.hasMany(Instructor, {
@@ -72,14 +74,14 @@ module.exports = {
             foreignKey: 'head',
         });
 
-        Subject.belongsToMany(Semester, { through: SubOffering });
-        Semester.belongsToMany(Subject, { through: SubOffering });
+        Instructor.belongsToMany(Subject, { through:SubOffering });
+        Subject.belongsToMany(Instructor, { through:SubOffering });
 
-        Instructor.hasMany(SubOffering, {
+        Semester.hasMany(SubOffering, {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         });
-        SubOffering.belongsTo(Instructor);
+        SubOffering.belongsTo(Semester);
 
         Semester.hasMany(Student, {
             foreignKey: 'current_sem',
@@ -92,6 +94,15 @@ module.exports = {
 
         Student.belongsToMany(SubOffering, { through: StudentSubjectRegistration });
         SubOffering.belongsToMany(Student, { through: StudentSubjectRegistration });
+
+        Department.belongsToMany(SubOffering, { through: SubOfferingForDept });
+        SubOffering.belongsToMany(Department, { through: SubOfferingForDept });
+
+        Course.hasMany(SubOfferingForDept, {
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+        SubOfferingForDept.belongsTo(Course);
     }   
 }
 

@@ -259,7 +259,6 @@ module.exports = {
             const stringId = intToStringId(subOff.id);
             return {
                 id: stringId,
-                sem_no: subOff.sem_no,
                 subjectId: subOff.subjectId,
                 semesterId: subOff.semesterId,
                 instructorId: subOff.instructorId
@@ -269,6 +268,14 @@ module.exports = {
     },
 
     getSubOfferings: async (req, res, next) => {
+        const hod = req.authUser;
+        const int_emp_id = stringToIntId(hod.employeeId);
+
+        const dept = await Department.findOne({
+            where:{
+                head: int_emp_id
+            }
+        });
         let allSubOfferings;        
 
         try{
@@ -276,8 +283,11 @@ module.exports = {
         }catch(err){
             return next(err);
         }
-
-        allSubOfferings = allSubOfferings.map((sub) => {
+        let allSubjects = [];
+        
+        let sampleSub = await allSubOfferings[0].getSubject();
+        console.log("sampleSub", sampleSub);
+        allSubOfferings = allSubOfferings.map((subOff) => {
             const stringId = intToStringId(subOff.id);
             return {
                 id: stringId,
@@ -286,7 +296,7 @@ module.exports = {
                 instructorId: subOff.instructorId
             };
         });
-        return res.json(allSubOfferings);
+        return res.json(sampleSub);
     },
 
     createSubOffering: async (req, res, next) => {

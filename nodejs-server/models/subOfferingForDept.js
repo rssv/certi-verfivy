@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken');
 
 const { sequelize } = require('../utils/database');
 
-const SubOffering = sequelize.define('subOffering',{
+const SubOfferingForDept = sequelize.define('subOfferingForDept',{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    subjectId: {
+    departmentId:{
         type: DataTypes.INTEGER,
         get() {
-            let value = this.getDataValue('subjectId');
+            let value = this.getDataValue('departmentId');
             if(value){
                 const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
                 const stringIdParts = stringId.split('.');
@@ -23,13 +23,13 @@ const SubOffering = sequelize.define('subOffering',{
 
         set(value) {
             const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('subjectId', intId.id);
+            this.setDataValue('departmentId', intId.id);
         }
     },
-    semesterId: {
+    subOfferingId: {
         type: DataTypes.INTEGER,
         get() {
-            let value = this.getDataValue('semesterId');
+            let value = this.getDataValue('subOfferingId');
             if(value){
                 const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
                 const stringIdParts = stringId.split('.');
@@ -40,13 +40,13 @@ const SubOffering = sequelize.define('subOffering',{
 
         set(value) {
             const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('semesterId', intId.id);
+            this.setDataValue('subOfferingId', intId.id);
         }
     },
-    instructorId: {
+    courseId: {
         type: DataTypes.INTEGER,
         get() {
-            let value = this.getDataValue('instructorId');
+            let value = this.getDataValue('courseId');
             if(value){
                 const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
                 const stringIdParts = stringId.split('.');
@@ -57,9 +57,9 @@ const SubOffering = sequelize.define('subOffering',{
 
         set(value) {
             const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('instructorId', intId.id);
+            this.setDataValue('courseId', intId.id);
         }
     }
 });
 
-module.exports = SubOffering; 
+module.exports = SubOfferingForDept;

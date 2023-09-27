@@ -816,7 +816,8 @@ module.exports = {
             return {
                 id: stringId,
                 sem_session: sem.sem_session,
-                sem_type: sem.sem_type
+                sem_type: sem.sem_type,
+                sem_no: sem.sem_no
             };
         });
         return res.json(createdSemesters);
@@ -836,7 +837,8 @@ module.exports = {
             return {
                 id: stringId,
                 sem_session: sem.sem_session,
-                sem_type: sem.sem_type
+                sem_type: sem.sem_type,
+                sem_no: sem.sem_no
             };
         })
         return res.json(allSemesters);
@@ -855,7 +857,8 @@ module.exports = {
         return res.json({
             id: stringId,
             sem_session: createdSemester.sem_session,
-            sem_type: createdSemester.sem_type
+            sem_type: createdSemester.sem_type,
+            sem_no: createdSemester.sem_no
         });
     },
 
@@ -881,7 +884,8 @@ module.exports = {
         return res.json({
             id: stringId,
             sem_session: fetchedSemester.sem_session,
-            sem_type: fetchedSemester.sem_type
+            sem_type: fetchedSemester.sem_type,
+            sem_no: fetchedSemester.sem_no
         });
     },
 
