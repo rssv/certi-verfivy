@@ -9,6 +9,11 @@ const Employee = sequelize.define('employee',{
         primaryKey: true,
         autoIncrement: true
     },
+    uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
+    },
     emp_name:{
         type: DataTypes.STRING,
         allowNull: false

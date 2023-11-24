@@ -2,8 +2,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 //require('dotenv').config()
-const { User } = require('../models');
-const { intToStringId, stringToIntId, } = require('../utils/transformers');
+const { 
+    User
+} = require('../models')
 
 module.exports = {
     loginHandler: async (req, res, next) => {
@@ -20,10 +21,9 @@ module.exports = {
         const match = await bcrypt.compare(passcode, foundUser.passcode);
         if (match) {
             // create JWTs
-            const stringId = intToStringId(foundUser.id);
             const accessToken = jwt.sign(
                 { 
-                    id: stringId,
+                    uuid: foundUser.uuid,
                     user_name: foundUser.user_name,
                     user_role: foundUser.user_role,
                     user_type: foundUser.user_type
@@ -33,7 +33,7 @@ module.exports = {
             );
             const refreshToken = jwt.sign(
                 { 
-                    id: stringId,
+                    uuid: foundUser.uuid,
                     user_name: foundUser.user_name 
                 },
                 process.env.REFRESH_TOKEN_SECRET,
@@ -56,7 +56,7 @@ module.exports = {
             res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
             return res.json(
                 { 
-                    id: stringId,
+                    uuid: foundUser.uuid,
                     user_name: foundUser.user_name,
                     user_role: foundUser.user_role,
                     user_type: foundUser.user_type,
@@ -83,11 +83,9 @@ module.exports = {
             return res.sendStatus(204);
         }
 
-        const rfUserId = stringToIntId(refresh_token_user.id);
-
         let foundUser = await User.findOne({
             where: {
-                id: rfUserId
+                uuid: refresh_token_user.uuid
             }
         });
 
@@ -102,7 +100,7 @@ module.exports = {
                 refresh_token: null
             }, {
                 where: {
-                    id: rfUserId
+                    id: foundUser.id
                 }
             });
         }catch(err){
@@ -125,21 +123,18 @@ module.exports = {
         }catch(err){
             return res.status(403).send({message: 'unauthorized'});
         }
-        
-        const rfUserId = stringToIntId(refresh_token_user.id);
 
         let foundUser = await User.findOne({
             where: {
-                id: rfUserId
+                uuid: refresh_token_user.uuid
             }
         });
 
         if ((!foundUser) || (foundUser.refresh_token !== refreshToken)) return res.status(403).send({ message: "forbidden" }); //Forbidden 
         
-        const stringId = intToStringId(foundUser.id);
         const accessToken = jwt.sign(
             { 
-                id: stringId,
+                uuid: foundUser.uuid,
                 user_name: foundUser.user_name,
                 user_role: foundUser.user_role,
                 user_type: foundUser.user_type

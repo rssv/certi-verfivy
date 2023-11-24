@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 
-const { intToStringId, stringToIntId, } = require('../utils/transformers');
 const { 
     Student,
     Employee,
@@ -9,7 +9,10 @@ const {
     User, 
     Instructor,
     Semester,
-    StudentSubjectRegistration
+    StudentSubjectRegistration,
+    SubOffering,
+    SubOfferingForDept,
+    Subject
 } = require('../models')
 
 
@@ -23,57 +26,73 @@ module.exports = {
             return next(err);
         }
 
-        allStudents = allStudents.map((student) => {
-            const stringId = intToStringId(student.id);
+        allStudents = allStudents.map(async (student) => {
+            let department  = await student.getDepartment();
+            let course = await student.getCourse();
             return {
-                id: stringId,
+                uuid: student.uuid,
                 adm_no: student.adm_no,
                 s_name: student.s_name,
                 year_of_adm: student.year_of_adm,
                 gender: student.gender,
                 major1: student.major1,
                 major2: student.major2,
-                departmentId: student.departmentId,
-                courseId: student.courseId
-            };
+                departmentId: department.uuid,
+                courseId: course.uuid
+            }
         });
-        return res.json(allStudents);
+        return res.json(await Promise.all(allStudents));
     },
 
     createStudents: async (req, res, next) => {
+        let inputStudents = req.body.students.map(async(student) => {
+            const department = await Department.findOne({
+                where: {
+                    uuid: student.departmentId
+                }
+            });
+            const course = await Course.findOne({
+                where: {
+                    uuid: student.courseId
+                }
+            })
+            return { ...student, courseId: course.id, departmentId: department.id }
+        });
+        inputStudents = await Promise.all(inputStudents);
+
         let createdStudents;
 
         try{
-            createdStudents =  await Student.bulkCreate(req.body.students, { returning: true });
+            createdStudents =  await Student.bulkCreate(inputStudents, { returning: true });
         } catch(err){
             return next(err);
         }
 
-        createdStudents = createdStudents.map((student) => {
-            const stringId = intToStringId(student.id);
+        createdStudents = createdStudents.map(async(student) => {
+            let course = await student.getCourse();
+            let department = await student.getDepartment();
             return {
-                id: stringId,
+                uuid: student.uuid,
                 adm_no: student.adm_no,
                 s_name: student.s_name,
                 year_of_adm: student.year_of_adm,
                 gender: student.gender,
                 major1: student.major1,
                 major2: student.major2,
-                departmentId: student.departmentId,
-                courseId: student.courseId
+                departmentId: department.uuid,
+                courseId: course.uuid
             };
         });
-        return res.json(createdStudents);
+        return res.json(await Promise.all(createdStudents));
     },
 
     getStudent: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedStudent;
 
         try{
             fetchedStudent = await Student.findOne({
                 where: {
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -84,9 +103,8 @@ module.exports = {
             return res.status(404).send({msg: 'student not found'});
         }
 
-        const stringId = intToStringId(fetchedStudent.id);
         return res.json({
-            id: stringId,
+            uuid: fetchedStudent.uuid,
             adm_no: fetchedStudent.adm_no,
             s_name: fetchedStudent.s_name,
             year_of_adm: fetchedStudent.year_of_adm,
@@ -107,10 +125,8 @@ module.exports = {
             return next(err);
         }
 
-        const stringId = intToStringId(createdStudent.id);
-
         return res.json({
-            id: stringId,
+            uuid: createdStudent.uuid,
             adm_no: createdStudent.adm_no,
             s_name: createdStudent.s_name,
             year_of_adm: createdStudent.year_of_adm,
@@ -123,17 +139,16 @@ module.exports = {
     },
 
     updateStudent: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedStudent;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedStudent = await Student.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -144,13 +159,12 @@ module.exports = {
     },
 
     removeStudent: async (req, res) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedStudent;
 
         try{
             removedStudent = await Student.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -170,9 +184,8 @@ module.exports = {
         }
 
         allEmployees = allEmployees.map((emp) => {
-            const stringId = intToStringId(emp.id);
             return {
-                id: stringId,
+                uuid: emp.uuid,
                 emp_name: emp.emp_name,
                 e_type: emp.e_type,
                 e_role: emp.e_role,
@@ -192,9 +205,8 @@ module.exports = {
         }
 
         createdEmployees = createdEmployees.map((emp) => {
-            const stringId = intToStringId(emp.id);
             return {
-                id: stringId,
+                uuid: emp.uuid,
                 emp_name: emp.emp_name,
                 e_type: emp.e_type,
                 e_role: emp.e_role,
@@ -205,13 +217,12 @@ module.exports = {
     },
 
     getEmployee: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedEmployee;
 
         try{
             fetchedEmployee = await Employee.findOne({
                 where: {
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -222,9 +233,8 @@ module.exports = {
             return res.status(404).send({msg: 'employe not found'});
         }
        
-        const stringId = intToStringId(fetchedEmployee.id);
         return res.json({
-            id: stringId,
+            uuid: fetchedEmployee.uuid,
             emp_name: fetchedEmployee.emp_name,
             e_type: fetchedEmployee.e_type,
             e_role: fetchedEmployee.e_role,
@@ -241,9 +251,8 @@ module.exports = {
             return next(err);
         }
 
-        const stringId = intToStringId(createdEmployee.id);
         return res.json({
-            id: stringId,
+            uuid: createdEmployee.uuid,
             emp_name: createdEmployee.emp_name,
             e_type: createdEmployee.e_type,
             e_role: createdEmployee.e_role,
@@ -252,17 +261,16 @@ module.exports = {
     },
 
     updateEmployee: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedEmployee;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedEmployee = await Employee.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -273,13 +281,12 @@ module.exports = {
     },
 
     removeEmployee: async (req, res) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedEmployee;
 
         try{
             removedEmployee = await Employee.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -299,9 +306,8 @@ module.exports = {
         }
 
         allDepartments = allDepartments.map((dept) => {
-            const stringId = intToStringId(dept.id);
             return {
-                id: stringId,
+                uuid: dept.uuid,
                 d_code: dept.d_code,
                 d_name: dept.d_name,
                 head: dept.head
@@ -311,34 +317,43 @@ module.exports = {
     },
 
     createDepartments: async (req, res, next) => {
+        let inputDepartments = req.body.students.map(async(dept) => {
+            const head = await Employee.findOne({
+                where: {
+                    uuid: dept.head
+                }
+            });
+            return { ...dept, head: head.id }
+        });
+        inputStudents = await Promise.all(inputDepartments);
+
         let createdDepartments;
 
         try {
-            createdDepartments = await Department.bulkCreate(req.body.departments, { returning: true });
+            createdDepartments = await Department.bulkCreate(inputDepartments, { returning: true });
         } catch(err){
             return next(err);
         }
 
-        createdDepartments = createdDepartments.map((dept) => {
-            const stringId = intToStringId(dept.id);
+        createdDepartments = createdDepartments.map(async(dept) => {
+            const head = await dept.getEmployee();
             return {
-                id: stringId,
+                uuid: dept.uuid,
                 d_code: dept.d_code,
                 d_name: dept.d_name,
-                head: dept.head
+                head: head.uuid
             };
         });
-        return res.json(createdDepartments);
+        return res.json(await Promise.all(createdDepartments));
     },
 
     getDepartment: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedDepartment;
 
         try{
             fetchedDepartment =  await Department.findOne({
                 where:{
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -349,9 +364,8 @@ module.exports = {
             return res.status(404).send({msg: 'department not found'});
         }
         
-        const stringId = intToStringId(fetchedDepartment.id);
         return res.json({
-            id: stringId,
+            uuid: fetchedDepartment.uuid,
             d_code: fetchedDepartment.d_code,
             d_name: fetchedDepartment.d_name,
             head: fetchedDepartment.head
@@ -367,9 +381,8 @@ module.exports = {
             return next(err);
         }
         
-        const stringId = intToStringId(createdDepartment.id);
         return res.json({
-            id: stringId,
+            uuid: createdDepartment.uuid,
             d_code: createdDepartment.d_code,
             d_name: createdDepartment.d_name,
             head: createdDepartment.head
@@ -377,17 +390,16 @@ module.exports = {
     },
 
     updateDepartment: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedDepartment;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedDepartment = await Department.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -398,13 +410,12 @@ module.exports = {
     },
 
     removeDepartment: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedDepartment;
 
         try{
             removedDepartment = await Department.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -426,9 +437,8 @@ module.exports = {
         }
         
         createdCourses = createdCourses.map((course) => {
-            const stringId = intToStringId(course.id);
             return {
-                id: stringId,
+                uuid: course.uuid,
                 c_name: course.c_name,
                 c_duration: course.c_duration
             };
@@ -446,9 +456,8 @@ module.exports = {
         }
         
         allCourses = allCourses.map((course) => {
-            const stringId = intToStringId(course.id);
             return {
-                id: stringId,
+                uuid: course.uuid,
                 c_name: course.c_name,
                 c_duration: course.c_duration
             }
@@ -465,22 +474,20 @@ module.exports = {
             return next(err);
         }
        
-        const stringId = intToStringId(createdCourse.id);
         return res.json({
-            id: stringId,
+            uuid: createdCourse.uuid,
             c_name: createdCourse.c_name,
             c_duration: createdCourse.c_duration
         });
     },
 
     getCourse: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedCourse;
 
         try{
             fetchedCourse =  await Course.findOne({
                 where:{
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -491,26 +498,25 @@ module.exports = {
             return res.status(404).send({msg: 'course not found'});
         }
         
-        const stringId = intToStringId(fetchedCourse.id);
+        
         return res.json({
-            id: stringId,
+            uuid: fetchedCourse.uuid,
             c_name: fetchedCourse.c_name,
             c_duration: fetchedCourse.c_duration
         });
     },
 
     updateCourse: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedCourse;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedCourse = await Course.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -521,13 +527,12 @@ module.exports = {
     },
 
     removeCourse: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedCourse;
 
         try{
             removedCourse = await Course.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -540,7 +545,28 @@ module.exports = {
     createUsers: async (req, res, next) => {
         let reqUsers = req.body.users.map(async(r_user) => {
             const hashedPasscode = await bcrypt.hash(r_user.passcode, 10);
-            return {...r_user, passcode: hashedPasscode};
+            let student = null;
+            let employee = null;
+            if(r_user.studentId){
+                student = await Student.findOne({
+                    where: {
+                        uuid: r_user.studentId
+                    }
+                });
+            }
+            if(r_user.employeeId){
+                employee = await Employee.findOne({
+                    where: {
+                        uuid: r_user.employeeId
+                    }
+                })
+            }
+            return {
+                ...r_user, 
+                passcode: hashedPasscode, 
+                studentId: student && student.id, 
+                employeeId: employee && employee.id
+            };
         })
         reqUsers = await Promise.all(reqUsers);
         let createdUsers;
@@ -551,15 +577,16 @@ module.exports = {
             return next(err);
         }
 
-        createdUsers = createdUsers.map((user) => {
-            const stringId = intToStringId(user.id);
+        createdUsers = createdUsers.map(async(user) => {
+            let student = user.studentId && (await user.getStudent());
+            let employee = user.employee && (await user.getEmployee());
             return {
-                id: stringId,
+                uuid: user.uuid,
                 user_name: user.user_name,
                 user_role: user.user_role,
                 user_type: user.user_type,
-                employeeId: user.employeeId,
-                studentId: user.studendId
+                employeeId: employee && employee.uuid,
+                studentId: student && student.uuid
             };
         })
         return res.json(createdUsers);
@@ -575,9 +602,8 @@ module.exports = {
         }
 
         allUsers = allUsers.map((user) => {
-            const stringId = intToStringId(user.id);
             return {
-                id: stringId,
+                uuid: user.uuid,
                 user_name: user.user_name,
                 user_role: user.user_role,
                 user_type: user.user_type,
@@ -599,9 +625,8 @@ module.exports = {
             return next(err);
         }
         
-        const stringId = intToStringId(createdUser.id);
         return res.json({
-            id: stringId,
+            uuid: createdUser.uuid,
             user_name: createdUser.user_name,
             user_role: createdUser.user_role,
             user_type: createdUser.user_type,
@@ -611,13 +636,12 @@ module.exports = {
     },
 
     getUser: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedUser;
 
         try{
             fetchedUser =  await User.findOne({
                 where:{
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -628,9 +652,8 @@ module.exports = {
             return res.status(404).send({msg: 'user not found'});
         }
         
-        const stringId = intToStringId(fetchedUser.id);
         return res.json({
-            id: stringId,
+            uuid: fetchedUser.uuid,
             user_name: fetchedUser.user_name,
             user_role: fetchedUser.user_role,
             user_type: fetchedUser.user_type,
@@ -640,17 +663,16 @@ module.exports = {
     },
 
     updateUser: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedUser;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedUser = await User.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -661,13 +683,12 @@ module.exports = {
     },
 
     removeUser: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedUser;
 
         try{
             removedUser = await User.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -687,9 +708,8 @@ module.exports = {
         }
 
         allInstructors = allInstructors.map((instructor) => {
-            const stringId = intToStringId(instructor.id);
             return {
-                id: stringId,
+                uuid: instructor.uuid,
                 cv_link: instructor.cv_link,
                 departmentId: instructor.departmentId,
                 employeeId: instructor.employeeId
@@ -708,9 +728,8 @@ module.exports = {
         }
 
         createdInstructors = createdInstructors.map((instructor) => {
-            const stringId = intToStringId(instructor.id);
             return {
-                id: stringId,
+                uuid: instructor.uuid,
                 cv_link: instructor.cv_link,
                 departmentId: instructor.departmentId,
                 employeeId: instructor.employeeId
@@ -720,13 +739,12 @@ module.exports = {
     },
 
     getInstructor: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedInstructor;
 
         try{
             fetchedInstructor =  await Instructor.findOne({
                 where:{
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -737,9 +755,8 @@ module.exports = {
             return res.status(404).send({msg: 'instructor not found'});
         }
        
-        const stringId = intToStringId(fetchedInstructor.id);
         return res.json({
-            id: stringId,
+            uuid: fetchedInstructor.uuid,
             cv_link: fetchedInstructor.cv_link,
             departmentId: fetchedInstructor.departmentId,
             employeeId: fetchedInstructor.employeeId
@@ -755,9 +772,8 @@ module.exports = {
             return next(err);
         }
         
-        const stringId = intToStringId(createdInstructor.id);
         return res.json({
-            id: stringId,
+            uuid: createdInstructor.uuid,
             cv_link: createdInstructor.cv_link,
             departmentId: createdInstructor.departmentId,
             employeeId: createdInstructor.employeeId
@@ -765,17 +781,16 @@ module.exports = {
     },
 
     updateInstructor: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedInstructor;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedInstructor = await Instructor.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -786,13 +801,12 @@ module.exports = {
     },
 
     removeInstructor: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedInstructor;
 
         try{
             removedInstructor = await Instructor.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -812,9 +826,8 @@ module.exports = {
         }
 
         createdSemesters = createdSemesters.map((sem) => {
-            const stringId = intToStringId(sem.id);
             return {
-                id: stringId,
+                uuid: sem.uuid,
                 sem_session: sem.sem_session,
                 sem_type: sem.sem_type,
                 sem_no: sem.sem_no
@@ -833,9 +846,8 @@ module.exports = {
         }
 
         allSemesters = allSemesters.map((sem) => {
-            const stringId = intToStringId(sem.id);
             return {
-                id: stringId,
+                uuid: sem.uuid,
                 sem_session: sem.sem_session,
                 sem_type: sem.sem_type,
                 sem_no: sem.sem_no
@@ -853,9 +865,8 @@ module.exports = {
             return next(err);
         }
         
-        const stringId = intToStringId(createdSemester.id);
         return res.json({
-            id: stringId,
+            uuid: createdSemester.uuid,
             sem_session: createdSemester.sem_session,
             sem_type: createdSemester.sem_type,
             sem_no: createdSemester.sem_no
@@ -863,13 +874,12 @@ module.exports = {
     },
 
     getSemester: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedSemester;
 
         try{
             fetchedSemester =  await Semester.findOne({
                 where:{
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -880,9 +890,8 @@ module.exports = {
             return res.status(404).send({msg: 'semester not found'});
         }
        
-        const stringId = intToStringId(fetchedSemester.id);
         return res.json({
-            id: stringId,
+            uuid: fetchedSemester.uuid,
             sem_session: fetchedSemester.sem_session,
             sem_type: fetchedSemester.sem_type,
             sem_no: fetchedSemester.sem_no
@@ -890,17 +899,16 @@ module.exports = {
     },
 
     updateSemester: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedSemester;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedSemester = await Semester.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -911,13 +919,12 @@ module.exports = {
     },
 
     removeSemester: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedSemester;
 
         try{
             removedSemester = await Semester.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -937,9 +944,8 @@ module.exports = {
         }
 
         createdStudentSubjectRegistrations = createdStudentSubjectRegistrations.map((studSubReg) => {
-            const stringId = intToStringId(studSubReg.id);
             return {
-                id: stringId,
+                uuid: studSubReg.uuid,
                 marks: studSubReg.marks,
                 status: studSubReg.status,
                 studentId: studSubReg.studendId,
@@ -959,9 +965,8 @@ module.exports = {
         }
 
         allStudentSubjectRegistrations = allStudentSubjectRegistrations.map((studSubReg) => {
-            const stringId = intToStringId(studSubReg.id);
             return {
-                id: stringId,
+                uuid: studSubReg.uuid,
                 marks: studSubReg.marks,
                 status: studSubReg.status,
                 studentId: studSubReg.studendId,
@@ -980,9 +985,8 @@ module.exports = {
             return next(err);
         }
         
-        const stringId = intToStringId(createdStudentSubjectRegistration.id);
         return res.json({
-            id: stringId,
+            uuid: createdStudentSubjectRegistration.uuid,
             marks: createdStudentSubjectRegistration.marks,
             status: createdStudentSubjectRegistration.status,
             studentId: createdStudentSubjectRegistration.studendId,
@@ -991,13 +995,12 @@ module.exports = {
     },
 
     getStudentSubjectRegistration: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let fetchedStudentSubjectRegistration;
 
         try{
             fetchedStudentSubjectRegistration =  await StudentSubjectRegistration.findOne({
                 where:{
-                    id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -1008,9 +1011,8 @@ module.exports = {
             return res.status(404).send({msg: 'studentSubjectRegistration not found'});
         }
        
-        const stringId = intToStringId(fetchedStudentSubjectRegistration.id);
         return res.json({
-            id: stringId,
+            uuid: fetchedStudentSubjectRegistration.uuid,
             marks: fetchedStudentSubjectRegistration.marks,
             status: fetchedStudentSubjectRegistration.status,
             studentId: fetchedStudentSubjectRegistration.studendId,
@@ -1019,17 +1021,16 @@ module.exports = {
     },
 
     updateStudentSubjectRegistration: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let updatedStudentSubjectRegistration;
 
-        if(req.body.id){
+        if(req.body.id || req.body.uuid){
             return res.status(400).send({'msg': 'cannot update id'});
         }
 
         try{
             updatedStudentSubjectRegistration = await StudentSubjectRegistration.update(req.body, {
                 where: {
-                  id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -1040,13 +1041,12 @@ module.exports = {
     },
 
     removeStudentSubjectRegistration: async (req, res, next) => {
-        const intParamsId = stringToIntId(req.params.id);
         let removedStudentSubjectRegistration;
 
         try{
             removedStudentSubjectRegistration = await StudentSubjectRegistration.destroy({
                 where: {
-                id: intParamsId
+                    uuid: req.params.id
                 }
             });
         } catch(err){
@@ -1056,3 +1056,248 @@ module.exports = {
         return res.json(removedStudentSubjectRegistration);
     }
 }
+
+// {
+//     "students": [
+//         {
+//             "adm_no": "20ME0001",
+//             "s_name": "Anil Pandey",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "20ME0002",
+//             "s_name": "Sudhanshu Singh",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "20ME0003",
+//             "s_name": "Sourav Sarkar",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "20ME0004",
+//             "s_name": "Jasmine Anand",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "20ME0005",
+//             "s_name": "Saransh Soni",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "20ME0006",
+//             "s_name": "Leela Tiwari",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "20ME0007",
+//             "s_name": "Badal Rai",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "20ME0008",
+//             "s_name": "Deepak Kumar",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "20ME0009",
+//             "s_name": "Tushar Rai",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         },
+//         {
+//             "adm_no": "20ME0010",
+//             "s_name": "Vamika Agarwal",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         },
+//         {
+//             "adm_no": "20ME0011",
+//             "s_name": "Lalit Sarkar",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         },
+//         {
+//             "adm_no": "20ME0012",
+//             "s_name": "Jasmine Verma",
+//             "year_of_adm": 2020,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         },
+//         {
+//             "adm_no": "21ME0001",
+//             "s_name": "Preeti Bharti",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "21ME0002",
+//             "s_name": "Bhumika Agarwal",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "21ME0003",
+//             "s_name": "Saransh Singh",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "21ME0004",
+//             "s_name": "Kunal Rai",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "CSE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMjgxfQ.NwpedWBwVMV7MQDYrc5OScC88nlEBi1ZdInynSJga7I"
+//         },
+//         {
+//             "adm_no": "21ME0005",
+//             "s_name": "Punit Rai",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "21ME0006",
+//             "s_name": "Mohan Yadav",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "21ME0007",
+//             "s_name": "Roshani Kumari",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "21ME0008",
+//             "s_name": "Rishi Gupta",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "EE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MiwiaWF0IjoxNjkyMTcwMjgxfQ.t88Z-7oL6dTq6EFzKDWFRF0DjW_dNOkEy0Juqv9wDBs"
+//         },
+//         {
+//             "adm_no": "21ME0009",
+//             "s_name": "Haricharan Rai",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         },
+//         {
+//             "adm_no": "21ME0010",
+//             "s_name": "Parimal Raj",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "male",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         },
+//         {
+//             "adm_no": "21ME0011",
+//             "s_name": "Leela Anand",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         },
+//         {
+//             "adm_no": "21ME0012",
+//             "s_name": "Kirti Bharti",
+//             "year_of_adm": 2021,
+//             "courseId":"eyJpZCI6MSwiaWF0IjoxNjkyMTcwMDkxfQ.KEFgP-_XbSUDAaqRZLxu_jjBuZoLTwWRRJhj4YSgBTg",
+//             "gender": "female",
+//             "major1": "ECE",
+//             "major2": null,
+//             "departmentId":"eyJpZCI6MywiaWF0IjoxNjkyMTcwMjgxfQ.FET-AcHPpl7o5QWSAeLWU6Py_AjQ7B7MqRpwEXPcWWY"
+//         }
+//     ]
+// }

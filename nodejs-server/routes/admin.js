@@ -38,11 +38,11 @@ router.put('/department/:id', auth, adminRoute, adminController.updateDepartment
 router.delete('/department/:id', auth, adminRoute, adminController.removeDepartment);
 
 
-router.get('/courses', auth, adminRoute, adminController.getCourses);
-router.post('/courses', auth, adminRoute, adminController.createCourses);
+router.get('/courses', adminController.getCourses);
+router.post('/courses', adminController.createCourses);
 
 router.get('/course/:id', auth, adminRoute, adminController.getCourse);
-router.post('/course', auth, adminRoute, adminController.createCourse);
+router.post('/course', adminController.createCourse);
 router.put('/course/:id', auth, adminRoute, adminController.updateCourse);
 router.delete('/course/:id', auth, adminRoute, adminController.removeCourse);
 
@@ -63,6 +63,7 @@ router.get('/instructor/:id', auth, adminRoute, adminController.getInstructor);
 router.post('/instructor', auth, adminRoute, adminController.createInstructor);
 router.put('/instructor/:id', auth, adminRoute, adminController.updateInstructor);
 router.delete('/instructor/:id', auth, adminRoute, adminController.removeInstructor);
+
 
 
 module.exports = router;

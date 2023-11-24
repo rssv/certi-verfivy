@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 const { User } = require('../models');
-const { intToStringId, stringToIntId, } = require('../utils/transformers');
 
 const auth = async(req, res, next) => {
     let accessToken = req.headers.authorization;
@@ -21,17 +20,13 @@ const auth = async(req, res, next) => {
                 //console.log("auth error", err);
                 return res.send(err);
             }
-            // const foundUser = users.find(user => user.username === decoded.username)
-            // if(!foundUser)
-            //     return res.status(403).send('user not found');
-            const intId = stringToIntId(decoded.id);
+            
             const aUser = await User.findOne({
                 where: {
-                    id: intId
+                    uuid: decoded.uuid
                 }
             });
             req.authUser = aUser;
-            //console.log("next")
             next();
         }
     );

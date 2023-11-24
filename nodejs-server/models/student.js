@@ -9,6 +9,11 @@ const Student = sequelize.define('student',{
         primaryKey: true,
         autoIncrement: true
     },
+    uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
+    },
     adm_no: {
         type: DataTypes.STRING,
         allowNull: false
@@ -26,20 +31,7 @@ const Student = sequelize.define('student',{
         allowNull: false
     },
     current_sem:{
-        type: DataTypes.INTEGER,
-        get() {
-            let value = this.getDataValue('current_sem');
-            if(value){
-                const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
-                const stringIdParts = stringId.split('.');
-                return stringIdParts[1] + '.' + stringIdParts[2];
-            }
-            else return value;
-        },
-        set(value) {
-            const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('current_sem', intId.id);
-        }
+        type: DataTypes.INTEGER
     },
     major1: {
         type: DataTypes.STRING
@@ -48,38 +40,10 @@ const Student = sequelize.define('student',{
         type: DataTypes.STRING
     },
     departmentId: {
-        type: DataTypes.INTEGER,
-        get() {
-            let value = this.getDataValue('departmentId');
-            if(value){
-                const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
-                const stringIdParts = stringId.split('.');
-                return stringIdParts[1] + '.' + stringIdParts[2];
-            }
-            else return value;
-        },
-
-        set(value) {
-            const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('departmentId', intId.id);
-        }
+        type: DataTypes.INTEGER
     },
     courseId: {
-        type: DataTypes.INTEGER,
-        get() {
-            let value = this.getDataValue('courseId');
-            if(value){
-                const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
-                const stringIdParts = stringId.split('.');
-                return stringIdParts[1] + '.' + stringIdParts[2];
-            }
-            else return value;
-        },
-
-        set(value) {
-            const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('courseId', intId.id);
-        }
+        type: DataTypes.INTEGER
     }
 
 });

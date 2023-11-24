@@ -9,6 +9,11 @@ const Semester = sequelize.define('semester',{
         primaryKey: true,
         autoIncrement: true
     },
+    uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
+    },
     sem_session:{
         type: DataTypes.STRING,
         allowNull: false

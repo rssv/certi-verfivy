@@ -9,56 +9,19 @@ const SubOffering = sequelize.define('subOffering',{
         primaryKey: true,
         autoIncrement: true
     },
+    uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
+    },
     subjectId: {
-        type: DataTypes.INTEGER,
-        get() {
-            let value = this.getDataValue('subjectId');
-            if(value){
-                const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
-                const stringIdParts = stringId.split('.');
-                return stringIdParts[1] + '.' + stringIdParts[2];
-            }
-            else return value;
-        },
-
-        set(value) {
-            const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('subjectId', intId.id);
-        }
+        type: DataTypes.INTEGER
     },
     semesterId: {
-        type: DataTypes.INTEGER,
-        get() {
-            let value = this.getDataValue('semesterId');
-            if(value){
-                const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
-                const stringIdParts = stringId.split('.');
-                return stringIdParts[1] + '.' + stringIdParts[2];
-            }
-            else return value;
-        },
-
-        set(value) {
-            const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('semesterId', intId.id);
-        }
+        type: DataTypes.INTEGER
     },
     instructorId: {
-        type: DataTypes.INTEGER,
-        get() {
-            let value = this.getDataValue('instructorId');
-            if(value){
-                const stringId = jwt.sign({id: value}, process.env.INT_TO_STRING_SECRET);
-                const stringIdParts = stringId.split('.');
-                return stringIdParts[1] + '.' + stringIdParts[2];
-            }
-            else return value;
-        },
-
-        set(value) {
-            const intId = jwt.verify( process.env.JWT_ALGORITHM_CONST + '.' + value, process.env.INT_TO_STRING_SECRET);
-            this.setDataValue('instructorId', intId.id);
-        }
+        type: DataTypes.INTEGER
     }
 });
 

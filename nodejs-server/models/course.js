@@ -9,6 +9,11 @@ const Course = sequelize.define('course',{
         primaryKey: true,
         autoIncrement: true
     },
+    uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
+    },
     c_name:{
         type: DataTypes.STRING,
         allowNull: false
